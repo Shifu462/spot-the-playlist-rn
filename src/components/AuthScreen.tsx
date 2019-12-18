@@ -6,28 +6,20 @@ import {
     TouchableHighlight,
 } from 'react-native';
 import AppColors from '../api/AppColors';
-import SpotifyAuth from './SpotifyAuth';
 
-export default class AuthPage extends React.Component {
-    state = {
-        showSpotifyAuth: false,
-    };
-
+export default class AuthScreen extends React.Component {
     render() {
-        if (this.state.showSpotifyAuth) 
-            return <SpotifyAuth />;
-        
         return (
-            <View>
+            <View style={styles.container}>
                 <View style={styles.tokenMessageContainer}>
                     <Text style={styles.text}>У вас не сохранён токен.</Text>
                 </View>
 
                 <TouchableHighlight
                     style={styles.getTokenButton}
-                    onPress={() => this.setState({showSpotifyAuth: true})}
+                    onPress={() => (this.props as any).navigation.navigate('SpotifyWebAuth')}
                 >
-                    <Text style={styles.getTokenButtonText}>Получить</Text>
+                    <Text style={styles.getTokenButtonText}>Логин через Spotify</Text>
                 </TouchableHighlight>
             </View>
         );
@@ -36,24 +28,31 @@ export default class AuthPage extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        marginTop: 20,
+    },
     text: {
-        color: 'white',
+        color: AppColors.White,
     },
     tokenMessageContainer: {
         padding: 20,
-        borderWidth: 2,
-        borderColor: '#ccc',
+        borderWidth: 1,
+        borderRightWidth: 0,
+        borderLeftWidth: 0,
+        backgroundColor: AppColors.StrictBlack,
+        alignSelf: 'stretch',
+        borderColor: AppColors.Gray,
     },
     getTokenButton: {
         marginTop: 20,
-        backgroundColor: AppColors.SpotifyGreen,
+        backgroundColor: AppColors.Green,
         borderRadius: 20,
         paddingVertical: 10,
         paddingHorizontal: 20,
         alignSelf: 'center',
     },
     getTokenButtonText: {
-        color: 'white',
+        color: AppColors.White,
         textTransform: 'uppercase',
         fontWeight: 'bold',
     },

@@ -1,25 +1,30 @@
-import React from 'react';
-import {
-    StyleSheet,
-    View,
-} from 'react-native';
-import AuthPage from './src/components/AuthPage';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
+
+import AuthScreen from './src/components/AuthScreen';
+import SpotifyWebAuthScreen from './src/components/SpotifyWebAuthScreen';
+
 import AppColors from './src/api/AppColors';
 
-export default function App() {
-    return (
-        <View style={styles.container}>
-            <AuthPage />
-        </View>
-    );
-}
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        backgroundColor: AppColors.SpotifyBlack,
-        alignItems: 'center',
-        justifyContent: 'center',
+const MainNavigator = createStackNavigator({
+    Auth: {screen: AuthScreen},
+    SpotifyWebAuth: {screen: SpotifyWebAuthScreen},
+},
+{
+    defaultNavigationOptions: {
+        headerStyle: {
+            backgroundColor: AppColors.BarBlack,
+        },
+        headerTitleStyle: {
+            color: AppColors.White,
+        }
+    },
+    headerMode: 'screen',
+    cardStyle: {
+        backgroundColor: AppColors.Black,
     },
 });
+
+const AppContainer = createAppContainer(MainNavigator);
+export default AppContainer;

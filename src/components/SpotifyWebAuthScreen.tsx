@@ -1,21 +1,14 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { WebView } from 'react-native-webview';
 import Spotify from '../utils/Spotify';
 
-export default class SpotifyAuth extends React.Component {
-    state = {
-        isLoading: true,
-    };
-
-    async componentDidMount() {
-        console.log(Spotify.AuthLink);
-    }
-
+export default class SpotifyWebAuthScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <WebView style={styles.webView}
+                <WebView
+                    style={styles.webView}
                     source={{uri: Spotify.AuthLink}}
                 />
             </View>
@@ -29,8 +22,6 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
     },
     webView: {
-        // width: 100,
-        marginTop: 20,
         alignSelf: 'stretch',
         flex: 1,
     },

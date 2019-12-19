@@ -3,6 +3,7 @@ import { View, StyleSheet, Alert } from 'react-native';
 import { WebView, WebViewNavigation } from 'react-native-webview';
 import Spotify from '../utils/Spotify';
 import { NavigationInjectedProps } from 'react-navigation';
+import { ACTION } from '../api/reducer';
 
 export default class SpotifyWebAuthScreen extends React.Component<NavigationInjectedProps> {
     extractFromUrl(url: string) {
@@ -31,6 +32,7 @@ export default class SpotifyWebAuthScreen extends React.Component<NavigationInje
         if (ev.url.startsWith(Spotify.redirectUri)) {
             const { token } = this.extractFromUrl(ev.url);
             this.setState({token});
+            (this.props as any).dispatch(ACTION.SET_TOKEN, )
 
             const spotify = new Spotify(token);
             const recentTracks = await spotify.getRecentTracks();

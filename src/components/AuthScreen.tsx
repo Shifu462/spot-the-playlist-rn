@@ -6,8 +6,9 @@ import {
     TouchableHighlight,
 } from 'react-native';
 import AppColors from '../api/AppColors';
+import { NavigationInjectedProps } from 'react-navigation';
 
-export default class AuthScreen extends React.Component {
+export default class AuthScreen extends React.Component<NavigationInjectedProps> {
     render() {
         return (
             <View style={styles.container}>
@@ -17,13 +18,13 @@ export default class AuthScreen extends React.Component {
 
                 <TouchableHighlight
                     style={styles.getTokenButton}
-                    onPress={() => (this.props as any).navigation.navigate('SpotifyWebAuth')}
+                    onPress={() => this.props.navigation.navigate('SpotifyWebAuth')}
                 >
                     <Text style={styles.getTokenButtonText}>Логин через Spotify</Text>
                 </TouchableHighlight>
             </View>
         );
-        
+
     }
 }
 
